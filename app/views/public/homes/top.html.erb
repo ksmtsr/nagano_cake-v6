@@ -1,0 +1,37 @@
+<div class="container">
+ <div class="mt-5 mb-5">
+  <div class="row justify-content-center">
+   <div class="card" style="max-width: 450px;">
+    <img class="card-img" src="/assets/strawberries.jpg" alt="">
+     <div class="card-img-overlay">
+      <p class="text-white">ようこそ、ながのCAKEへ！</p>
+      <p class="text-white">このサイトは、ケーキ販売のECサイトになります。</p>
+      <p class="text-white">会員でない方も商品の閲覧はできますが、</p>
+      <p class="text-white">購入には会員登録が必要になります。</p>
+     </div>
+    </div>
+   <div class="col-12">
+    <h2><strong>新着商品</strong></h2>
+   </div>
+    <% @items.each do |item| %>
+      <div>
+       <%= link_to item_path(item) do %>
+        <% if item.image.attached? %>
+        <%= image_tag item.image, size: "200x150" %>
+        <% else %>
+        <%= image_tag 'no_image.jpg', size: "200x150" %>
+        <% end %>
+        <% end %>
+        <p><%= item.name %></p>
+        <p>¥<%= item.price %></p>
+      </div>
+  <% end %>
+   </div>
+  </div>
+  <div class="row">
+   <div class="col-8"></div>
+    <div class="col-4">
+     <%= link_to "全ての商品を見る>", items_path(@items) %>
+    </div>
+   </div>
+  </div>

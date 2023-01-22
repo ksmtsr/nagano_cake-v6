@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <div class="border mt-5">
+        ジャンル検索
+      <div class="border mt-3">
+        <p>ケーキ</p>
+          <p>焼き菓子</p>
+          <p>プリン</p>
+        <p>キャンディ</p>
+      </div>
+      </div>
+    </div>
+    <div class="col-4 mt-5">
+      <% if @items.image.attached? %>
+        <%= image_tag @items.image, size: "350x250" %>
+          <% else %>
+        <%= image_tag 'no_image.jpg', size: "200x130" %>
+      <% end %>
+    </div>
+  <div class="col-5">
+    <div class="font-weight-bold h2 mt-5">
+      <%= @items.name %>
+    </div>
+      <h4><%= @items.introduction %></h4>
+    <div class="mt-5">
+      ¥<%= @items.with_tax_price %>（税込）
+    </div>
+      <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+        <%= f.select :amount, *[1..20],{ include_blank: '個数選択'}, class: "btn btn-primary dropdown-toggle" %>
+          <%= f.hidden_field :item_id,value: @items.id %>
+        <%= f.submit "カートに入れる", class: "btn btn-lg btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

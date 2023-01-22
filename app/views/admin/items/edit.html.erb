@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="mt-5 mb-5">
+    <headline>商品編集</headline>
+   </div>
+ </div>
+  <div class="row justify-content-center">
+    <%= form_with model: @item, url: admin_update_item_path(@item.id) do |f| %>
+      <table class="table table-borderless">
+    <tr>
+  <td>商品画像</td>
+<td><%= f.file_field :image, accept: "image/*" %></td>
+  </tr>
+    <tr>
+  <td>商品名</td>
+<td><%= f.text_field :name %></td>
+  </tr>
+    <tr>
+  <td>商品説明</td>
+<td><%= f.text_area :introduction, :size => "30x5"%></td>
+  </tr>
+    <tr>
+  <td>ジャンル</td>
+<td><%= f.select :genre_id, {'ケーキ': 1, 'プリン': 2,'焼き菓子': 3, 'キャンディ': 4}, { include_blank: '--選択してください--'}, { required: true } %></td>
+  </tr>
+    <tr>
+  <td>税抜価格</td>
+<td><%= f.text_field :price, :placeholder => "1000" %>円</td>
+  </tr>
+   <tr>
+<td>販売ステータス</td>
+  <td>
+    <% @item.is_active %>
+  <%= f.radio_button :is_active, :true %>
+    販売中
+      <%= f.radio_button :is_active, :false %>
+    販売停止中
+  </td>
+    </tr>
+      </div>
+        </table>
+      <div class="text-center">
+    <%= f.submit "変更を保存", class: "btn btn-lg btn-success"  %>
+  </div>
+    <% end %>
+      </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+$(function(){
+  $('.dropdown-menu .dropdown-item').click(function(){
+    var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
+    visibleItem.text($(this).attr('value'));
+  });
+});
+</script>

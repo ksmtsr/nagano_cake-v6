@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+   <div class="mt-3 mb-5">
+    <headline>ログイン</headline>
+   </div>
+  </div>
+ <headline>会員の方はこちらからログイン</headline>
+<div class="row justify-content-center">
+ <div class="col-6">
+  <table class="table table-borderless">
+   <%= form_with model: @customer, url: customer_session_path, method: :post do |f| %>
+    <tr>
+   <td><%= f.label :メールアドレス %></td>
+  <td><%= f.email_field :email, class: "w-100", autofocus: true, autocomplete: "email" %></td>
+ </tr>
+<tr>
+ <td><%= f.label :パスワード %></td>
+  <td><%= f.password_field :password, class: "w-100", autocomplete: "current-password" %></td>
+   </tr>
+   <tr>
+   <td><%= f.submit "ログイン", class: "btn btn-lg btn-primary" %></td>
+ </tr>
+<% end %>
+ </table>
+  </div>
+  </div>
+  <div class="row">
+   <headline>会員登録がお済みでない方</headline>
+    <%= link_to "こちら", new_customer_registration_path %>から新規登録を行なってください。
+  </div>
+ </div>

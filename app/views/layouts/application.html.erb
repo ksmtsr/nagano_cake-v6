@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>NaganoCake</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+<header>
+  <div class="border-bottom border-dark" style="padding:10px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+      <%= link_to "ながのCAKE", root_path, class: "font-weight-bold text-info h1 text-decoration-none" %>
+    </div>
+    <div class="col-8">
+  <div class="text-right">
+
+<% if admin_signed_in? %>
+<div class="btn-group">
+<%= link_to "商品一覧", admin_items_path, class: "btn btn-outline-secondary mr-3" %>
+<%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-secondary mr-3" %>
+<%= link_to "注文履歴一覧", admin_root_path, class: "btn btn-outline-secondary mr-3" %>
+<%= link_to "ジャンル一覧", admin_root_path, class: "btn btn-outline-secondary mr-3" %>
+<%= button_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+</div>
+<% elsif customer_signed_in? %>
+
+ようこそ、<%= current_customer.last_name %>さん！
+<div class="btn-group">
+<%= link_to "マイページ", customers_path, class: "btn btn-outline-secondary mr-3" %>
+<%= link_to "商品一覧", items_path, class: "btn btn-outline-secondary mr-3" %>
+<%= link_to "カート", cart_items_path, class: "btn btn-outline-secondary mr-3" %>
+<%= button_to 'ログアウト', destroy_customer_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+</div>
+<% else %>
+<div class="btn-group">
+<%= link_to "About", about_path, class: "btn btn-outline-secondary" %>
+<%= link_to "商品一覧", items_path, class: "btn btn-outline-secondary" %>
+<%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-secondary" %>
+<%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-secondary" %>
+</div>
+<% end %>
+</div>
+<div class="input-group">
+  <input type="text" id="txt-search" class="form-control mt-3" placeholder="Search"></input>
+  <span class="input-group-btn input-group-append">
+    <submit type="submit" id="btn-search" class="btn btn-primary mt-3"><i class="fas fa-search"></i></submit>
+    </div>
+  </span>
+  </div>
+    </div>
+  </div>
+</header>
+  <body>
+    <%= yield %>
+  </body>
+    <footer>
+    </footer>
+</html>

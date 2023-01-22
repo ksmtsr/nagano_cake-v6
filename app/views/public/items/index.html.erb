@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="mt-5 mb-5">
+    <h3><strong>商品一覧</strong></h3>(全<%= @allitems.count %>件)
+     </div>
+     <div class="row">
+       <div class="col-2">
+      <div class="border mt-5">
+        ジャンル検索
+      <div class="border mt-3">
+        <p>ケーキ</p>
+          <p>焼き菓子</p>
+          <p>プリン</p>
+        <p>キャンディ</p>
+      </div>
+      </div>
+    </div>
+   <% @allitems.each do |item| %>
+  <div class="row">
+   <div class="col-6">
+    <%= link_to item_path(item) do %>
+      <% if item.image.attached? %>
+        <%= image_tag item.image, size: "200x130" %>
+          <% else %>
+        <%= image_tag 'no_image.jpg', size: "200x130" %>
+      <% end %>
+    <% end %>
+    <p><%= item.name %></p>
+    <p>¥<%= item.price %></p>
+    </div>
+  </div>
+  <% end %>
+  <%= paginate @allitems %>
+  </div>
+  </div>
